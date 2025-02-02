@@ -29,9 +29,18 @@
     <!-- 依赖的jar包列表 -->
     <build>
         <!-- 插件列表 -->
-        <!--<plugins>
-            <plugin></plugin>
-        </plugins>-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source><!-- 源代码使用的JDK版本 -->
+                    <target>${java.version}</target><!-- 需要生成的目标class文件的编译版本 -->
+                    <encoding>${project.build.sourceEncoding}</encoding><!-- 字符集编码 -->
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <!-- 依赖的管理
@@ -208,6 +217,35 @@
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.17.0</version>
+        </dependency>
+
+        <!-- direct add java rabbit mq client -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.21.0</version>
+        </dependency>
+        <!-- or add spring rabbit mq client -->
+        <!--<dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>1.2.2.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-tx</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>3.1.3</version>
+        </dependency>-->
 
     </dependencies>
 
@@ -221,6 +259,13 @@
 
     <!-- 对应dependency里面OGNL表达式${*.*}的值 -->
     <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <resource.delimiter>@</resource.delimiter>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <skipTests>true</skipTests><!--添加为true，则跳过测试直接打包 -->
         <!-- spring版本号 -->
         <spring.version>4.3.1.RELEASE</spring.version>
         <!-- mybatis版本号 -->
