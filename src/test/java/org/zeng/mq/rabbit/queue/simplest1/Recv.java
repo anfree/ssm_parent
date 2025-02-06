@@ -7,12 +7,13 @@ import com.rabbitmq.client.DeliverCallback;
 import java.nio.charset.StandardCharsets;
 
 /**
- * RabbitMq接收消息测试类。
+ * RabbitMq consumer(receiver).
+ * The consumer will consume and print it to standard output.
  *
  * @author 曾祥江
  * @since 2025/1/23
  */
-public class RabbitMqRecvTest {
+public class Recv {
 
     private final static String QUEUE_NAME = "hello";
 

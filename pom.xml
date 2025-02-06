@@ -229,6 +229,12 @@
             <artifactId>amqp-client</artifactId>
             <version>5.21.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.rabbitmq/stream-client -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>stream-client</artifactId>
+            <version>0.22.0</version>
+        </dependency>
         <!-- or add spring rabbit mq client -->
         <!--<dependency>
             <groupId>org.springframework.amqp</groupId>

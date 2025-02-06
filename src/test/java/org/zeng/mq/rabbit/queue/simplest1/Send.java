@@ -7,14 +7,14 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.nio.charset.StandardCharsets;
 
 /**
- * RabbitMQ 生产者测试类
- * The simplest thing that does something.
+ * RabbitMQ producer(sender).
+ * The producer will connect to RabbitMQ, send a single message, then exit.
  * P -> Queue -> C
  *
  * @author 曾祥江
  * @since 2025/1/23
  */
-public class RabbitMqSendTest {
+public class Send {
 
     private final static String QUEUE_NAME = "hello";
 
