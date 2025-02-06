@@ -1,4 +1,4 @@
-package org.zeng.mq.rabbit.workQueues2;
+package org.zeng.mq.rabbit.queue.workQueues2;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
  * @author 曾祥江
  * @since 2025/1/23
  */
-public class Worker2 {
+public class Worker {
 
     private static final String TASK_QUEUE_NAME = "task_queue";
 

@@ -1,4 +1,4 @@
-package org.zeng.mq.rabbit.publishSubscribe3;
+package org.zeng.mq.rabbit.queue.publishSubscribe3;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;

@@ -1,4 +1,4 @@
-package org.zeng.mq.rabbit.workQueues2;
+package org.zeng.mq.rabbit.queue.workQueues2;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

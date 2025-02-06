@@ -1,4 +1,4 @@
-package org.zeng.mq.rabbit.topic5;
+package org.zeng.mq.rabbit.queue.topic5;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;

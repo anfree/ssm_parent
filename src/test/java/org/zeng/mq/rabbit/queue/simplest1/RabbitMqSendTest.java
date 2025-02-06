@@ -1,4 +1,4 @@
-package org.zeng.mq.rabbit.simplest1;
+package org.zeng.mq.rabbit.queue.simplest1;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

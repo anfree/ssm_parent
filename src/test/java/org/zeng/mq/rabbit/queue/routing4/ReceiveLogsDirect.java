@@ -1,4 +1,4 @@
-package org.zeng.mq.rabbit.routing4;
+package org.zeng.mq.rabbit.queue.routing4;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
