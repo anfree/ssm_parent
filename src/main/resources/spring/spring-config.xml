@@ -9,7 +9,11 @@
         https://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
 
     <!-- 配置连接工厂 -->
-    <rabbit:connection-factory id="connectionFactory" host="localhost" port="5672" username="guest" password="guest"/>
+    <rabbit:connection-factory id="connectionFactory" host="localhost" port="5672" username="guest" password="guest" virtual-host="/"/>
+    <!--<rabbit:connection-factory id="connectionFactory" host="www.haeport.com" port="5672" username="aseadmin" password="aseadmin" virtual-host="ase"/>-->
+
+    <!-- 配置RabbitTemplate -->
+    <rabbit:template id="tianjinRabbitTemplate" connection-factory="connectionFactory"/>
 
     <!-- 配置消息监听器容器 -->
     <rabbit:listener-container connection-factory="connectionFactory">
@@ -18,8 +22,5 @@
 
     <!-- 配置消息监听器 -->
     <bean id="messageListener" class="org.zeng.test.mq.RabbitQueueListener"/>
-
-    <!-- 配置RabbitTemplate -->
-    <rabbit:template id="tianjinRabbitTemplate" connection-factory="connectionFactory"/>
 
 </beans>
