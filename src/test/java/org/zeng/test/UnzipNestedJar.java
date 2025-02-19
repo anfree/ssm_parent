@@ -65,11 +65,9 @@ public class UnzipNestedJar {
                 Enumeration<? extends ZipEntry> entries = zipFile.entries();
                 while (entries.hasMoreElements()) {
                     ZipEntry entry = entries.nextElement();
-                    log.info("Entry: {}", entry);
                     String entryName = entry.getName();
-                    log.info("Entry: {}", entryName);
                     Path entryPath = Paths.get(outputDir.toString(), entryName);
-                    log.info("EntryPath: {}", entryPath);
+                    log.trace("EntryPath: {}", entryPath);
 
                     // Prevent path traversal attacks
                     if (!entryPath.normalize().startsWith(outputDir.toPath().normalize())) {
@@ -81,26 +79,21 @@ public class UnzipNestedJar {
                     if (entry.isDirectory()) {
                         Files.createDirectories(entryFile.toPath());
                     } else {
-                        if (entryName.endsWith(".jar")) {
-                            if (entryName.startsWith("bytec")) {
-                                // If it's a nested JAR starting with "bytec", add it to the queue for processing
-                                File nestedOutputDir = entryFile.getParentFile();
-                                Files.createDirectories(nestedOutputDir.toPath());
-                                queue.add(entryFile);
-                                log.info("Found nested JAR: {}", entryFile.getAbsolutePath());
-                                log.info("queue: {}", queue);
-                                log.info("queue: {}", queue.size());
-                                log.info("queue: {}", queue.peek());
-                            } else {
-                                // 覆盖重复文件，不抛出异常
-                                Files.deleteIfExists(entryFile.toPath());
-                                Files.copy(zipFile.getInputStream(entry), entryFile.toPath());
-                            }
+                        Files.createDirectories(entryFile.getParentFile().toPath());
+                        // 覆盖重复文件，不抛出异常
+                        Files.deleteIfExists(entryFile.toPath());
+                        Files.copy(zipFile.getInputStream(entry), entryFile.toPath());
+
+                        if (entryName.endsWith(".jar") && entryName.startsWith("lib/bytec")) {
+                            // If it's a nested JAR starting with "bytec", add it to the queue for processing
+                            File nestedOutputDir = entryFile.getParentFile();
+                            Files.createDirectories(nestedOutputDir.toPath());
+                            queue.add(entryFile);
+                            log.info("Found nested JAR: {}", entryFile.getAbsolutePath());
+                            log.info("queue: {}", queue);
+                            log.info("queue: {}", queue.size());
                         } else {
-                            Files.createDirectories(entryFile.getParentFile().toPath());
-                            // 覆盖重复文件，不抛出异常
-                            Files.deleteIfExists(entryFile.toPath());
-                            Files.copy(zipFile.getInputStream(entry), entryFile.toPath());
+                            log.trace("Skipping non-nested-JAR file: {}", entryFile.getAbsolutePath());
                         }
                     }
                 }
