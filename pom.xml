@@ -231,6 +231,12 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-pool2</artifactId>
+                    <groupId>org.apache.commons</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- protostuff序列化依赖 -->
         <dependency>
@@ -267,16 +273,21 @@
             <version>0.16.0</version>
         </dependency>
         <!-- or add spring rabbit mq client -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-rabbit</artifactId>
             <version>1.2.2.RELEASE</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.20</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.11.1</version>
         </dependency>
 
     </dependencies>
@@ -299,7 +310,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <skipTests>true</skipTests><!--添加为true，则跳过测试直接打包 -->
         <!-- spring版本号 -->
-        <spring.version>3.2.4.RELEASE</spring.version>
+        <spring.version>4.3.1.RELEASE</spring.version>
         <!-- mybatis版本号 -->
         <mybatis.version>3.4.1</mybatis.version>
         <!-- slf4j + logback日志框架版本号 -->

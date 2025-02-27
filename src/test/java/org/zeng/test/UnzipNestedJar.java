@@ -30,7 +30,8 @@ public class UnzipNestedJar {
 //            return;
 //        }
 //        String pathname = args[0];
-        String pathname = "D:\\doc\\jd\\cbe\\customs\\ASE_2023_zzzb\\Client\\bytec-ase-launch-client-0.0.2-SNAPSHOT.jar";
+//        String pathname = "D:\\doc\\jd\\cbe\\customs\\ASE_2023_zzzb\\Client\\bytec-ase-launch-client-0.0.2-SNAPSHOT.jar";
+        String pathname = "D:\\doc\\jd\\cbe\\customs\\tianJin\\Tj.国密客户端_V0.1.9\\Client\\bytec-ase-launch-client-0.0.2-SNAPSHOT.jar";
 
         File file = new File(pathname);
         if (!file.exists() || !file.isFile()) {
