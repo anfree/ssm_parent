@@ -14,7 +14,7 @@ public class RmqTemplateTest {
     @Test
     void testSend() throws Exception {
         RmqTemplate template = new RmqTemplate();
-        template.convertAndSend("testQueue", "Hello RabbitMQ");
+        template.convertAndSend("DXPENT0000470415_TO_NODE", "Hello RabbitMQ".getBytes());
         System.out.println("Message sent successfully!");
     }
 

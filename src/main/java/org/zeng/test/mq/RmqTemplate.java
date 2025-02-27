@@ -26,23 +26,29 @@ public class RmqTemplate {
 
     static {
         connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("localhost");
-        connectionFactory.setPort(5672);
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
-        connectionFactory.setVirtualHost("/");
+//        connectionFactory.setHost("localhost");
+//        connectionFactory.setPort(5672);
+//        connectionFactory.setUsername("guest");
+//        connectionFactory.setPassword("guest");
+//        connectionFactory.setVirtualHost("/");
+        // 天津海关 RabbitMQ
+        connectionFactory.setHost("60.28.236.164");
+        connectionFactory.setPort(5678);
+        connectionFactory.setUsername("aseadmin");
+        connectionFactory.setPassword("aseadmin");
+        connectionFactory.setVirtualHost("vhost");
         rmqConnectionPool = new RmqConnectionPool(connectionFactory);
     }
 
-    public void convertAndSend(String queue, String message) throws Exception {
-        log.info("RabbitMQ 发送消息，队列为：{}，消息为：{}", queue, message);
+    public void convertAndSend(String queue, byte[] body) throws Exception {
+        log.info("RabbitMQ 发送消息，队列为：{}，消息为：{}", queue, body.toString());
         Connection connection = rmqConnectionPool.getConnection();
         try (Channel channel = connection.createChannel()) {
 
             channel.queueDeclare(queue, true, false, false, null);
 
             channel.confirmSelect();
-            channel.basicPublish("", queue, true, false, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes(StandardCharsets.UTF_8));
+            channel.basicPublish("", queue, true, false, MessageProperties.PERSISTENT_TEXT_PLAIN, body);
             channel.waitForConfirmsOrDie();
             log.info("RabbitMQ 发送消息成功");
 
