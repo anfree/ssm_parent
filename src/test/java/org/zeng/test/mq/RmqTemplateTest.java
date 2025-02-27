@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
  * @author 曾祥江
  * @since 2025/2/18
  */
-public class RabbitTemplateTest {
+public class RmqTemplateTest {
 
     // Test Case 1: Successfully send message
     @Test
     void testSend() throws Exception {
-        RabbitTemplate template = new RabbitTemplate();
+        RmqTemplate template = new RmqTemplate();
         template.convertAndSend("testQueue", "Hello RabbitMQ");
         System.out.println("Message sent successfully!");
     }
