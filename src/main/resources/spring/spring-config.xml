@@ -20,6 +20,6 @@
         <rabbit:listener queues="testQueue" ref="messageListener" method="onMessage"/>
     </rabbit:listener-container>
     <!-- 配置消息监听器 -->
-    <bean id="messageListener" class="org.zeng.test.mq.RabbitQueueListener"/>
+    <bean id="messageListener" class="org.zeng.test.mq.consumer.RabbitQueueListener"/>
 
 </beans>

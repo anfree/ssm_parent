@@ -3,6 +3,8 @@ package org.zeng.mq.rabbit.queue.simplest1;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -19,6 +21,7 @@ import java.util.concurrent.TimeoutException;
  * @since 2025/1/23
  */
 public class Send {
+    private static final Logger log = LoggerFactory.getLogger(Send.class);
 
     private final static String QUEUE_NAME = "DXPENT0000470415_TO_NODE";
 
@@ -50,20 +53,27 @@ public class Send {
 //        factory.setUsername("aseadmin");
 //        factory.setPassword("aseadmin");
 //        factory.setVirtualHost("ase");
+
+        Connection connection = null;
+        Channel channel = null;
         try {
-            Connection connection = factory.newConnection(executorService);
-            Channel channel = connection.createChannel();
+            connection = factory.newConnection(executorService);
+            channel = connection.createChannel();
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             String message = "Hello World!";
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
             System.out.println(" [x] Sent '" + message + "'");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (TimeoutException e) {
+        } catch (IOException | TimeoutException e) {
+            log.error("RabbitMQ 发送消息失败", e);
             throw new RuntimeException(e);
         } finally {
-            System.out.println("Done");
-
+            log.info("Done");
+            if (channel != null) {
+                channel.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
         }
 
     }

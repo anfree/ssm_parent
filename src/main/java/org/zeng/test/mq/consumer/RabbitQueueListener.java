@@ -1,4 +1,4 @@
-//package org.zeng.test.mq;
+//package org.zeng.test.mq.consumer;
 //
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@
 //import org.zeng.util.StringUtil;
 //
 ///**
-// * RabbitMQ监听队列
+// * RabbitMQ Spring监听队列
 // *
 // * @author 曾祥江
 // * @since 2025/1/10

@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.zeng.module.customs.CustomsService;
 import org.zeng.test.mq.RmqTemplate;
 
 /**
@@ -17,8 +18,10 @@ import org.zeng.test.mq.RmqTemplate;
 @RunWith(MockitoJUnitRunner.class)
 public class ProducerTest {
 
+    @Mock
+    private CustomsService customsService;
+
     @InjectMocks
-//    @Mock
     private RmqTemplate tianjinRmqTemplate;
 
     @InjectMocks
@@ -33,6 +36,9 @@ public class ProducerTest {
     public void sendMessage() {
         // 测试有效参数的情况
 //        producer.sendMessage("hello", "123456", "test");
-        producer.sendMessage("00069_TO_NODE", "123456", "test");
+        // tianJin customs send queue
+//        producer.sendMessage("DXPENT0000470415_TO_NODE", "123456", "test");
+        // tianJin customs receive queue
+        producer.sendMessage("NODE_TO_DXPENT0000470415", "123456", "test");
     }
 }
