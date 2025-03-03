@@ -11,10 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.zeng.module.customs.CustomsService;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 import static org.zeng.frame.constant.DataConstant.CHARSET_UTF8;
-
 
 /**
  * Rabbit Mq Template
@@ -32,20 +32,32 @@ public class RmqTemplate {
     private static final CustomsService customsService;
 
     static {
-        connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("localhost");
-        connectionFactory.setPort(5672);
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
-        connectionFactory.setVirtualHost("/");
-        // 天津海关 RabbitMQ
+        try {
+            connectionFactory = new ConnectionFactory();
+            connectionFactory.setHost("localhost");
+            connectionFactory.setPort(5672);
+            connectionFactory.setUsername("guest");
+            connectionFactory.setPassword("guest");
+            connectionFactory.setVirtualHost("/");
+            // 天津海关 RabbitMQ
 //        connectionFactory.setHost("60.28.236.164");
 //        connectionFactory.setPort(5678);
 //        connectionFactory.setUsername("aseadmin");
 //        connectionFactory.setPassword("aseadmin");
 //        connectionFactory.setVirtualHost("vhost");
-        rmqConnectionPool = new RmqConnectionPool(connectionFactory);
-        customsService = new CustomsService();
+            rmqConnectionPool = new RmqConnectionPool(connectionFactory);
+            customsService = new CustomsService();
+
+        } catch (Exception e) {
+            log.error("连接工厂初始化失败", e);
+            throw new ExceptionInInitializerError(e);
+        }
+    }
+
+    @PostConstruct
+    public void init() {
+        // 确保在Bean初始化完成后执行的逻辑
+        log.info("RmqTemplate 初始化完成");
     }
 
     public void convertAndSend(String queue, byte[] body) throws Exception {
@@ -70,7 +82,7 @@ public class RmqTemplate {
             // 创建连接
             Connection connection = rmqConnectionPool.getConnection();
             // 创建频道
-            Channel channel = connection.createChannel();
+            final Channel channel = connection.createChannel();
 
             // 声明队列，确保队列存在且持久化
             channel.queueDeclare(queue, true, false, false, null);
