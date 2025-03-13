@@ -34,17 +34,17 @@ public class RmqTemplate {
     static {
         try {
             connectionFactory = new ConnectionFactory();
-            connectionFactory.setHost("localhost");
-            connectionFactory.setPort(5672);
-            connectionFactory.setUsername("guest");
-            connectionFactory.setPassword("guest");
-            connectionFactory.setVirtualHost("/");
+//            connectionFactory.setHost("localhost");
+//            connectionFactory.setPort(5672);
+//            connectionFactory.setUsername("guest");
+//            connectionFactory.setPassword("guest");
+//            connectionFactory.setVirtualHost("/");
             // 天津海关 RabbitMQ
-//        connectionFactory.setHost("60.28.236.164");
-//        connectionFactory.setPort(5678);
-//        connectionFactory.setUsername("aseadmin");
-//        connectionFactory.setPassword("aseadmin");
-//        connectionFactory.setVirtualHost("vhost");
+            connectionFactory.setHost("60.28.236.164");
+            connectionFactory.setPort(5678);
+            connectionFactory.setUsername("aseadmin");
+            connectionFactory.setPassword("aseadmin");
+            connectionFactory.setVirtualHost("vhost");
             rmqConnectionPool = new RmqConnectionPool(connectionFactory);
             customsService = new CustomsService();
 

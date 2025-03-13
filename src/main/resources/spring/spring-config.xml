@@ -7,7 +7,8 @@
         https://www.springframework.org/schema/rabbit/spring-rabbit-1.3.xsd">
 
     <!-- 配置连接工厂 -->
-    <rabbit:connection-factory id="connectionFactory" host="localhost" port="5672" username="guest" password="guest" virtual-host="/" />
+    <!--<rabbit:connection-factory id="connectionFactory" host="localhost" port="5672" username="guest" password="guest" virtual-host="/" />-->
+    <rabbit:connection-factory id="connectionFactory" host="60.28.236.164" port="5678" username="aseadmin" password="aseadmin" virtual-host="vhost"/>
     <!--<rabbit:connection-factory id="connectionFactory" host="www.haeport.com" port="5672" username="aseadmin" password="aseadmin" virtual-host="ase"/>-->
 
     <!-- 配置RabbitTemplate -->

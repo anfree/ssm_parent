@@ -27,7 +27,11 @@ public class TjRmqListener implements ApplicationListener<ContextRefreshedEvent>
     public void onApplicationEvent(ContextRefreshedEvent event) {
         // 当Spring上下文被初始化或刷新时执行的逻辑
         log.info("RabbitMQ 接收消息 start");
-        String queue = "NODE_TO_DXPENT0000470415";
+
+        // tianJin customs send queue
+        String queue = "DXPENT0000470415_TO_NODE";
+        // tianJin customs receive queue
+//        String queue = "NODE_TO_DXPENT0000470415";
         tianjinRmqTemplate.receive(queue);
         log.info("RabbitMQ 接收消息 end");
 
